@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href= "{% static 'css/bootstrap.min.css' %}">
+    <script type = "text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+    <title>Single User Delete</title>
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="card col-md-6 mx-auto">
+            <div class="card-body">
+                <h3>Delete User</h3>
+                <h4>Are you sure u want to delete {{z.name}}?</h4>
+                <div class="row">
+                    <div class="col">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <input type="submit" value="Yes Confirm" class="btn btn-outline-success form-control col-sm">
+                        </form>
+
+                    </div>
+                    <div class="col">
+                        <input type="submit" value="not confirm" class="btn btn-outline-danger form-control col-sm">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

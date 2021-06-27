@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Register</title>
+</head>
+<body>
+    <div class="jumbotron text-center text-primary">
+        <h1>REGISTRATION FORM</h1>
+    </div>
+    <div class="container container-fluid">
+        <form action="{% url 'register' %}" method="POST">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col">
+                    <input type="text" class="form-control" id="firstname" placeholder="Enter Firstname" name="fn">
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" id="lastname" placeholder="Enter Lastname" name="ln">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col">
+                    <input type="text" class="form-control" id="email" placeholder="Enter Email" name="email">
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" id="phone" placeholder="Enter Mobile Number" name="phone">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col">
+                    <label class="form-control">Gender</label>
+                </div>
+                <div class="col">
+                    <input type="radio" class="form-control" name="gender" value="Male" id="male">
+                </div>
+                <div class="col">
+                    <label for="male" class="form-control">Male</label>
+                </div>
+                <div class="col">
+                    <input type="radio" class="form-control" name="gender" value="Female" id="female">
+                </div>
+                <div class="col">
+                    <label for="female" class="form-control">Female</label>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col">
+                    <label for="address" class="form-control" >Address</label>
+                    <textarea name="address" id="address" cols="151" rows="5" placeholder="Enter the address"></textarea>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col">
+                    <label for="language" class="form-control">Language</label>
+                    
+                </div>
+                <div class="col form-check">
+                    <label class="form-control form-check-label">
+                        <input type="checkbox" class=form-check-input" value="English" name="language"> English
+                    </label>
+                </div>
+                <div class="col form-check">
+                    <label class="form-control form-check-label">
+                        <input type="checkbox" class=form-check-input" value="Telugu" name="language"> Telugu
+                    </label>
+                </div>
+                <div class="col form-check">
+                    <label class="form-control form-check-label">
+                        <input type="checkbox" class=form-check-input" value="Hindi" name="language"> Hindi
+                    </label>
+                </div>
+                <div class="col form-check">
+                    <label class="form-control form-check-label">
+                        <input type="checkbox" class=form-check-input" value="Tamil" name="language"> Tamil
+                    </label>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col">
+                    <label for="hobbies" class="form-control">Hobbies</label>
+                </div>
+                <div class="col">
+                    <select name="hob" id="hob" class="form-control">
+                        <option value="Movies">Movies</option>
+                        <option value="Music">Music</option>
+                        <option value="Sports">Sports</option>
+                        <option value="Reading">Reading</option>
+                    </select>
+                </div>
+            </div>
+            <br>
+            <center><button type="submit" class="btn btn-primary mb-4" value="submit">Submit</button></center>
+        </form>
+    </div>
+</body>
+</html>
