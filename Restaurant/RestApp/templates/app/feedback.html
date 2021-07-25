@@ -1,0 +1,24 @@
+{% extends 'app/base.html' %}
+{% block title %}Feedback{% endblock %}
+{% block content %}
+<div class="container mt-4">
+	<div class="card col-md-6 mx-auto shadow-lg">
+		<h3>Feedback Form</h3>	
+		<form method="POST">
+			{% csrf_token %}
+			<input type="text" name="snmail" class="form-control my-2" placeholder="Enter Mailid">
+			<input type="text" name="sub" class="form-control my-2" placeholder="Enter subject">
+			<textarea class="form-control my-2" placeholder="Enter message.." name="msg" rows="5"></textarea>
+			<div class="row">
+				<div class="col">
+					<input type="reset" value="reset" class="form-control my-2 btn btn-outline-danger" name="">
+				</div>
+				<div class="col">
+					<input type="submit" value="send" class="form-control my-2 btn btn-outline-success" name="">
+				</div>
+			</div>
+
+		</form>	
+	</div>
+</div>
+{% endblock %}

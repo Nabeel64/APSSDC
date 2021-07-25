@@ -1,10 +1,18 @@
+{% load static %}
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <!-- Brand/logo -->
   <a class="navbar-brand" href="{% url 'hm' %}">Restaurant
   </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Navbar links -->
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
   
   <!-- Links -->
   <ul class="navbar-nav">
+    {% if not user.is_authenticated %}
     <li class="nav-item">
       <a class="nav-link" href="{% url 'hm' %}">Home</a>
     </li>
@@ -14,5 +22,74 @@
     <li class="nav-item">
       <a class="nav-link" href="{% url 'ct' %}">Contact</a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'reg' %}">Registration</a>
+    </li>
+    {% elif user.role == 2 %}
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'hm' %}">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'rstl' %}">Restuarnt List</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'itl' %}">Items List</a>
+    </li>
+    {% elif user.is_superuser %}
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'hm' %}">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'gvpm' %}">Permissions</a>
+    </li>
+    {% elif user.role == 3 %}
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'hm' %}">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'hm' %}">Order</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'fd' %}">Feedback</a>
+    </li>
+    {% else %}
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'hm' %}">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'rlrq' %}">Role Request</a>
+    </li>
+    {% endif %}
+    
   </ul>
+
+  <ul class="navbar-nav ml-auto">
+    {% if not  user.is_authenticated %}
+    <li class="nav-item">
+        <a class="nav-link float-right" href="{% url 'lg' %}">Login</a>
+    </li>
+    {% else %}
+    <li class="nav-item">
+        <a class="nav-link float-right" href="{% url 'lgo' %}">Logout</a>
+    </li>
+    <div class="dropdown">
+      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Hi welcome {% if user.role == 1 %}
+        <span>Guest</span>
+        {% elif user.role == 2 %}
+        <span>Manager</span>
+        {% else %}
+        <span>User</span>
+        {% endif %}
+      {{request.user.username}}
+      </button>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="{% url 'pf' %}">Profile</a>
+        <a class="dropdown-item" href="{% url 'chpd' %}">Change Password</a>
+        <a class="dropdown-item" href="#">Logout</a>
+      </div>
+    </div>
+    {% endif %}
+  </ul>
+</div>
+
 </nav>

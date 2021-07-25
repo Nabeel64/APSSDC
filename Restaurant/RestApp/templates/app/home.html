@@ -1,7 +1,134 @@
-{% extends 'app/base.html' %} {% block title %}Home{% endblock %} {% block content %}
-<div class="container">
-    <div class="jumbotron mt-4 shadow-lg border-success">
-        <h1>Welcome to HomePage</h1>
+{% extends 'app/base.html' %}{% load static %} {% block title %}Home{% endblock %} {% block content %}
+<h1 align="center">WELCOME TO PARADISE</h1>
+<div class="container-fluid mt-4">
+    {% if user.role == 2 %}
+    <div id="demo" class="carousel slide" data-ride="carousel">
+
+        <!-- Indicators -->
+        <ul class="carousel-indicators">
+            <li data-target="#demo" data-slide-to="0" class="active"></li>
+            <li data-target="#demo" data-slide-to="1"></li>
+        </ul>
+
+        <!-- The slideshow -->
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{% static 'images/biriyani1.jpg' %}" alt="Los Angeles" width="100%" height="750">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'images/biriyani2.jpg' %}" alt="Chicago" width="100%" height="750">
+            </div>
+        </div>
+
+        <!-- Left and right controls -->
+        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#demo" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
+    </div>
+    <h1 align="center">Our Menu</h1>
+    <div class="container-fluid">
+        <table class="table" style="text-align: center;">
+        <tr>
+            <td><img src="{% static 'images/Nizmai Mutton Biryani.jpg' %}" height="170px" width="200px"><br>
+                <b>Nizmai Mutton Biryani <br> ₹ 405.00</b>
+            </td>
+            <td><img src="{% static 'images/Nizami Chicken Biryani.jpg' %}" height="170px" width="200px"><br>
+                <b>Nizami Chicken Biryani <br> ₹ 365.00</b>
+            </td>
+            <td><img src="{% static 'images/Chicken Tikka Kebab.jpg' %}" height="170px" width="200px"><br>
+                <b>Chicken Tikka Kebab <br> ₹ 320.00</b>
+            </td>
+            <td><img src="{% static 'images/Special Chicken Biryani.jpg' %}" height="170px" width="200px"><br>
+                <b>Special Chicken Biryani <br> ₹ 525.00</b>
+            </td>
+        </tr>
+        <tr>
+            <td><img src="{% static 'images/NCB+NCB.jpg' %}" height="170px" width="200px"><br>
+                <b>Nizami Chicken Biryani <br> + <br> Nizami Chicken Biryani  <br> ₹ 508.00</b>
+            </td>
+            <td><img src="{% static 'images/Special Mutton Biryani.jpg' %}" height="170px" width="200px"><br>
+                <b>Special Mutton Biryani<br> ₹ 579.00</b>
+            </td>
+            <td><img src="{% static 'images/Haleem.jpg' %}" height="170px" width="200px"><br>
+                <b>Haleem<br> ₹ 209.52</b>
+            </td>
+            <td><img src="{% static 'images/Chicken Garlic Kebab.jpg' %}" height="170px" width="200px"><br>
+                <b>Chicken Garlic Kebab<br> ₹ 320.00</b>
+            </td>
+        </tr>
+        <tr>
+            <td><img src="{% static 'images/Supreme Chicken Biryani Pack.jpg' %}" height="170px" width="200px"><br>
+                <b>Chicken Garlic Kebab<br> ₹ 1299.00</b>
+            </td>
+        </tr>
+
+        </table>        
     </div>
 </div>
+<div class="row mx-2">
+        {% for x in y %}
+
+        <div class="col col-md-3">
+            <div class="card shadow-lg my-2">
+                <img src="{{x.rsimg.url}}" class="card-img-top" height="120px">
+                <div class="card-body">
+                    <tr>
+                        <td><span class="badge badge-primary" style="font-size: 20px;">{{x.rname}}</span></td>
+                        <td><span style="font-size: 28px; float: right;">{{x.address}}</span></td>
+                    </tr>
+                    <div class="row">
+                        <div class="col">
+                            <h6>items: {{x.nitems}}</h6>
+                        </div>
+                        <div class="col">
+                            <h6>Timings: {{x.timings}}</h6>
+                        </div>
+                        <div class="col">
+                            <a href="#" class="btn btn-outline-warning my-2">Check Items</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% elif user.is_superuser %}
+    <div class="jumbotron col-md-6 mx-auto shadow-lg mt-4">
+        <h3>You are admin</h3>
+    </div>
+    {% elif user.role == 3 %}
+    <div class="jumbotron col-md-6 mx-auto shadow-lg mt-4">
+        <h3>You are user</h3>
+        <div class="row mx-2">
+        {% for x in c %}
+
+        <div class="col col-md-3">
+            <div class="card shadow-lg my-2">
+                <img src="{{x.rsimg.url}}" class="card-img-top" height="120px">
+                <div class="card-body">
+                    <tr>
+                        <td><span class="badge badge-primary" style="font-size: 20px;">{{x.rname}}</span></td>
+                        <td><span style="font-size: 28px; float: right;">{{x.address}}</span></td>
+                    </tr>
+                    <div class="row">
+                        <div class="col">
+                            <h6>items: {{x.nitems}}</h6>
+                        </div>
+                        <div class="col">
+                            <h6>Timings: {{x.timings}}</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="jumbotron col-md-6 mx-auto shadow-lg mt-4">
+        <h3>You are in guest account</h3>
+    </div>
+    {% endif %}
 {% endblock %}
